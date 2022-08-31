@@ -1,8 +1,10 @@
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Grid, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { CardBox } from '../../Styled MUI components/CardBox'
 import EditIcon from '@mui/icons-material/Edit';
 import { StyledIconButton } from '../../Styled MUI components/StyledIconButton';
+import './Styles.css'
+import { GridItem } from '../../Styled MUI components/GridItem';
 
 function OngoingOpenCard() {
     return (
@@ -16,7 +18,7 @@ function OngoingOpenCard() {
                             <Typography variant='h6'>Started On:</Typography>
                             <Typography variant='h6'>Due By:</Typography>
                         </Stack>
-                        <CardBox border={2} borderColor='primary'>
+                        <CardBox border={2} sx={{ borderColor: 'primary.main' }}>
                             <Stack direction='row' justifyContent='space-between'>
                                 <Typography variant='h5'>Description:</Typography>
                                 <StyledIconButton>
@@ -26,6 +28,20 @@ function OngoingOpenCard() {
                             <br></br>
                             <Typography variant='body1'>bla bla bla whaf gagw gjsag ougljaw</Typography>
                         </CardBox>
+                        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item xs={6}>
+                                <GridItem>1</GridItem>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <GridItem>2</GridItem>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <GridItem>3</GridItem>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <GridItem>4</GridItem>
+                            </Grid>
+                        </Grid>
                     </Stack>
                 </CardBox>
             </Stack>

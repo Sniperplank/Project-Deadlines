@@ -7,7 +7,8 @@ export const lightTheme = createTheme({
             light: "#ffb74d"
         },
         secondary: {
-            main: "#d6d6d6"
+            main: "#d6d6d6",
+            light: "#e3e3e3"
         },
         buttonText: {
             main: "#212121"
