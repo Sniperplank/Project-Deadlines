@@ -11,6 +11,7 @@ import OngoingProjects from './Components/Projects Feed/Ongoing Projects/Ongoing
 import FinishedProjects from './Components/Projects Feed/Finished Projects/FinishedProjects';
 import AbortedProjects from './Components/Projects Feed/Aborted Projects/AbortedProjects';
 import About from './Pages/About';
+import OngoingOpenCard from './Components/Projects Feed/Ongoing Projects/OngoingOpenCard';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path='/' element={<></>} />
             <Route path='/ongoing' element={<OngoingProjects />} />
+            <Route path='/ongoing/:projectName' element={<OngoingOpenCard />} />
             <Route path='/finished' element={<FinishedProjects />} />
             <Route path='/aborted' element={<AbortedProjects />} />
             <Route path='/about' element={<About />} />

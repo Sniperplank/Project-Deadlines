@@ -1,10 +1,11 @@
 import { Stack, Typography } from '@mui/material'
 import React from 'react'
 import { CardBox } from '../../Styled MUI components/CardBox'
+import { Link } from 'react-router-dom'
 
 function OngoingCard() {
   return (
-    <CardBox>
+    <CardBox component={Link} to='/ongoing/:projectName'>
       <Stack direction='row' spacing={4} justifyContent='space-between'>
         <Stack spacing={4}>
           <Typography variant='h5'>Peoject Name</Typography>
