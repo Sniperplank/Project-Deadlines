@@ -4,7 +4,7 @@ import { CardBox } from '../../Styled MUI components/CardBox'
 import EditIcon from '@mui/icons-material/Edit';
 import { StyledIconButton } from '../../Styled MUI components/StyledIconButton';
 import './Styles.css'
-import { GridItem } from '../../Styled MUI components/GridItem';
+import Task from './Task';
 
 function OngoingOpenCard() {
     return (
@@ -28,18 +28,18 @@ function OngoingOpenCard() {
                             <br></br>
                             <Typography variant='body1'>bla bla bla whaf gagw gjsag ougljaw</Typography>
                         </CardBox>
-                        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={5}>
                             <Grid item xs={6}>
-                                <GridItem>1</GridItem>
+                                <Task />
                             </Grid>
                             <Grid item xs={6}>
-                                <GridItem>2</GridItem>
+                                <Task />
                             </Grid>
                             <Grid item xs={6}>
-                                <GridItem>3</GridItem>
+                                <Task />
                             </Grid>
                             <Grid item xs={6}>
-                                <GridItem>4</GridItem>
+                                <Task />
                             </Grid>
                         </Grid>
                     </Stack>
