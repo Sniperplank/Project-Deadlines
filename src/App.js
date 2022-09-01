@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <Body>
         <TopAppBar />
-        <Stack direction="row" spacing={2} justifyContent="space-between" height="100%" width="100vw">
+        <Stack direction="row" spacing={2} justifyContent="space-between" height="100vh" width="100vw">
           <LeftNavbar />
           <Routes>
             <Route path='/' element={<></>} />

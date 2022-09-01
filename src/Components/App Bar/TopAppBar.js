@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function TopAppBar() {
     return (
-        <AppBar position='static'>
+        <AppBar position='sticky'>
             <StyledToolbar>
                 <Stack spacing={1} sx={{ display: { xs: 'none', sm: 'block' } }}>
                     <Avatar>E</Avatar>
