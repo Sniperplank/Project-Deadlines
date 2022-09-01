@@ -3,14 +3,14 @@ import React from 'react'
 import { CardBox } from '../../Styled MUI components/CardBox'
 import EditIcon from '@mui/icons-material/Edit';
 import { StyledIconButton } from '../../Styled MUI components/StyledIconButton';
-import './Styles.css'
+import '../../../App.css'
 import Task from './Task';
 
 function OngoingOpenCard() {
     return (
-        <Box flex={4} p={5}>
-            <Stack width='100%' spacing={6} sx={{ marginTop: 10 }}>
-                <CardBox>
+        <Box flex={4} p={5} sx={{ overflowY: 'scroll' }}>
+            <Stack width='100%' spacing={6} sx={{ marginTop: 10, marginBottom: 20 }}>
+                <CardBox >
                     <Stack spacing={6}>
                         <Typography variant='h4' flexGrow={1} textAlign='center'>Project Name</Typography>
                         <hr></hr>
