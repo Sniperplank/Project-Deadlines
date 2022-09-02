@@ -13,7 +13,7 @@ function TopAppBar() {
                     <Typography variant='h6'>Eilaf Aljundi</Typography>
                 </Stack>
                 <Typography variant='h3' component={Link} to='/' color='primary' sx={{ textDecoration: 'none' }}>PROJECT DEADLINES</Typography>
-                <StyledButton variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Sign in</StyledButton>
+                <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Sign in</StyledButton>
             </StyledToolbar>
         </AppBar>
     )

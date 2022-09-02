@@ -8,6 +8,7 @@ function LeftNavbar() {
         <Box flex={1} justifyContent="center" sx={{ display: { xs: "none", sm: "flex" } }}>
             <Stack sx={{ width: 100, marginTop: 20 }} spacing={6}>
                 <Typography variant='h5' align='center'>Projects</Typography>
+                <hr></hr>
                 <StyledButton component={Link} to='/ongoing' variant='contained' color='primary'>Ongoing</StyledButton>
                 <StyledButton component={Link} to='/finished' variant='contained' color='primary'>Finished</StyledButton>
                 <StyledButton component={Link} to='/aborted' variant='contained' color='primary'>Aborted</StyledButton>
