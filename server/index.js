@@ -1,12 +1,13 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-const cors = require('cors')
-require("dotenv").config();
+import express from 'express'
+import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import cors from 'cors'
+import dotenv from 'dotenv'
 
-const userRoutes = require('./routes/users.js')
+import userRoutes from './routes/users.js'
 
 const app = express()
+dotenv.config()
 app.use(bodyParser.json({ limit: "30mb", extended: true }))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
 app.use(cors())
