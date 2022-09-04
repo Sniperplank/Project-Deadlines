@@ -11,6 +11,10 @@ function Auth() {
         setIsSignup((prev) => !prev)
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
     return (
         <Box flex={5} display='flex' justifyContent='center' alignItems='center' paddingBottom={10}>
             <CardBox>
@@ -28,7 +32,7 @@ function Auth() {
                         <StyledInput variant='outlined' name='email' label='Email' type='email' />
                         <StyledInput variant='outlined' name='password' label='Password' type='password' />
                         {isSignup && <StyledInput variant='outlined' name='confirmPassword' label='Confirm Password' type='password' />}
-                        <StyledButton type='submit' fullWidth variant='contained' color='primary'>
+                        <StyledButton type='submit' fullWidth variant='contained' color='primary' onClick={handleSubmit}>
                             {isSignup ? 'Sign Up' : 'Sign In'}
                         </StyledButton>
                         <Button onClick={switchMode}>
