@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { query } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
@@ -43,6 +43,17 @@ router.post('/signin', async (req, res) => {
         res.status(200).json({ result: existingUser, token })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
+    }
+})
+
+router.get('/', async (req, res) => {
+    const email = req.query
+
+    try {
+        const user = await User.find(email)
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
     }
 })
 

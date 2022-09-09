@@ -6,20 +6,23 @@ import { Link } from 'react-router-dom'
 import { logout } from '../../actions/auth'
 import { useNavigate, useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
+import axios from 'axios'
 
 function TopAppBar() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const [user, setUser] = useState({})
     const navigate = useNavigate()
     const location = useLocation()
 
     useEffect(() => {
-        const token = user?.token
-        if (token) {
-            const decodedToken = decode(token)
-            if (decodedToken.exp * 1000 < new Date().getTime()) logout(setUser, navigate)
+        async function getUserInfo() {
+            const request = await axios.get(`http://localhost:5000/user/?email=jonwick@gmail.com`)
+            setUser(request.data[0])
         }
-        setUser(JSON.parse(localStorage.getItem('profile')))
+        getUserInfo()
     }, [location])
+
+    console.log(user)
+    /* move logout function to this page and bring back the localstorage method of storing user info */
 
     return (
         <AppBar position='sticky'>
@@ -27,8 +30,8 @@ function TopAppBar() {
                 <Stack spacing={1} sx={{ display: { xs: 'none', sm: 'block' } }}>
                     {
                         user && <>
-                            <Avatar>{user.result.name.charAt(0)}</Avatar>
-                            <Typography variant='h6'>{user.result.name}</Typography>
+                            <Avatar>E</Avatar>
+                            <Typography variant='h6'>{user.name}</Typography>
                         </>
                     }
 
