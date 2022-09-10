@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { StyledButton } from '../Styled MUI components/StyledButton'
 import { StyledToolbar } from '../Styled MUI components/StyledToolbar'
 import { Link } from 'react-router-dom'
-import { logout } from '../../actions/auth'
 import { useNavigate, useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
 import axios from 'axios'
@@ -12,6 +11,13 @@ function TopAppBar() {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
     const location = useLocation()
+
+    const logout = () => {
+        console.log('logged out')
+        localStorage.clear()
+        setUser(null)
+        navigate('/')
+    }
 
     useEffect(() => {
         async function getUserInfo() {

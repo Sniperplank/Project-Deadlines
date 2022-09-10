@@ -19,13 +19,3 @@ export const signup = async (formData, navigate) => {
         console.log(error)
     }
 }
-
-export const logout = (setUser, navigate) => {
-    try {
-        localStorage.clear()
-        //setUser(null)
-        //navigate('/')
-    } catch (error) {
-        console.log(error)
-    }
-}
