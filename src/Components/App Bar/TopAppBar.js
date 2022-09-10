@@ -5,30 +5,21 @@ import { StyledToolbar } from '../Styled MUI components/StyledToolbar'
 import { Link } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
-import axios from 'axios'
 
 function TopAppBar() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const navigate = useNavigate()
     const location = useLocation()
 
     const logout = () => {
-        console.log('logged out')
         localStorage.clear()
         setUser(null)
         navigate('/')
     }
 
     useEffect(() => {
-        async function getUserInfo() {
-            const request = await axios.get(`http://localhost:5000/user/?email=jonwick@gmail.com`)
-            setUser(request.data[0])
-        }
-        getUserInfo()
+        setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
-
-    console.log(user)
-    /* move logout function to this page and bring back the localstorage method of storing user info */
 
     return (
         <AppBar position='sticky'>
@@ -36,8 +27,8 @@ function TopAppBar() {
                 <Stack spacing={1} sx={{ display: { xs: 'none', sm: 'block' } }}>
                     {
                         user && <>
-                            <Avatar>E</Avatar>
-                            <Typography variant='h6'>{user.name}</Typography>
+                            <Avatar>{user.result.name.charAt(0)}</Avatar>
+                            <Typography variant='h6'>{user.result.name}</Typography>
                         </>
                     }
 
@@ -45,7 +36,7 @@ function TopAppBar() {
                 <Typography variant='h3' component={Link} to='/' color='primary' sx={{ textDecoration: 'none' }}>PROJECT DEADLINES</Typography>
                 {
                     user ?
-                        <StyledButton onClick={logout(setUser, navigate)} variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Logout</StyledButton>
+                        <StyledButton onClick={logout} variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Logout</StyledButton>
                         : <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Sign in</StyledButton>
                 }
             </StyledToolbar>
