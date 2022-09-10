@@ -1,13 +1,14 @@
 import { AppBar, Typography, Avatar, Stack } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { StyledButton } from '../Styled MUI components/StyledButton'
 import { StyledToolbar } from '../Styled MUI components/StyledToolbar'
 import { Link } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
+import { useAuth } from '../../contexts/AuthContext'
 
 function TopAppBar() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const { user, setUser } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
