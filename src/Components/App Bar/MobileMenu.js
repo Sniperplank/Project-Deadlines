@@ -8,27 +8,40 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
+import { CardBox } from '../Styled MUI components/CardBox'
+import { StyledButton } from '../Styled MUI components/StyledButton'
 
-function MobileMenu({ logout }) {
-    const { user, setUser } = useAuth()
+function MobileMenu({ logout, onClose }) {
+    const { user } = useAuth()
 
     return (
         <Stack spacing={2} sx={{ display: { xs: 'flex', sm: 'none' } }}>
-            <Typography variant='h5'>Projects</Typography>
-            <MenuButton component={Link} to='/ongoing' variant='outlined' color='primary'>Ongoing</MenuButton>
-            <MenuButton component={Link} to='/finished' variant='outlined' color='primary'>Finished</MenuButton>
-            <MenuButton component={Link} to='/aborted' variant='outlined' color='primary'>Aborted</MenuButton>
+            {
+                user ? (<>
+                    <Typography variant='h5' align='center'>Projects</Typography>
+                    <MenuButton component={Link} to='/ongoing' onClick={onClose} variant='outlined' color='primary'>Ongoing</MenuButton>
+                    <MenuButton component={Link} to='/finished' onClick={onClose} variant='outlined' color='primary'>Finished</MenuButton>
+                    <MenuButton component={Link} to='/aborted' onClick={onClose} variant='outlined' color='primary'>Aborted</MenuButton>
+                </>) : (
+                    <CardBox display='flex' alignItems='center'>
+                        <Typography variant='h5' align='center'>Sign in to see projects!</Typography>
+                    </CardBox>
+                )
+            }
             <hr></hr>
-            <MenuButton component={Link} to='/' variant='outlined' color='primary' startIcon={<HomeIcon />}>Home</MenuButton>
-            <MenuButton component={Link} to='/about' variant='outlined' color='primary' startIcon={<InfoIcon />}>About</MenuButton>
+            <MenuButton component={Link} to='/' onClick={onClose} variant='outlined' color='primary' startIcon={<HomeIcon />}>Home</MenuButton>
+            <MenuButton component={Link} to='/about' onClick={onClose} variant='outlined' color='primary' startIcon={<InfoIcon />}>About</MenuButton>
             <MenuButton href="https://github.com/Sniperplank" variant='outlined' color='primary' startIcon={<GitHubIcon />}>GitHub</MenuButton>
             <hr></hr>
             {
                 user ?
-                    <MenuButton onClick={logout} variant='contained' color='primary'>Logout</MenuButton>
-                    : <MenuButton component={Link} to='/auth' variant='contained' color='primary'>Sign in</MenuButton>
+                    <StyledButton onClick={() => {
+                        logout()
+                        onClose()
+                    }} variant='contained' color='primary' sx={{ height: 40 }}>Logout</StyledButton>
+                    : <StyledButton component={Link} to='/auth' onClick={onClose} variant='contained' color='primary' sx={{ height: 40 }}>Sign in</StyledButton>
             }
-        </Stack>
+        </Stack >
     )
 }
 

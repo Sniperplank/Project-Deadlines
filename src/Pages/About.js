@@ -6,7 +6,7 @@ function About() {
     return (
         <Box flex={4} p={5}>
             <Stack width='100%' spacing={6} sx={{ marginTop: 10 }}>
-                <CardBox height={400}>
+                <CardBox minHeight={400}>
                     <Typography variant='h3'>About</Typography>
                     <br></br>
                     <br></br>
