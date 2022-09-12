@@ -21,7 +21,7 @@ function LeftNavbar() {
                     </Stack>
                 </>) :
                     (
-                        <CardBox height={300} marginTop={20} display='flex' alignItems='center'>
+                        <CardBox height={400} marginTop={20} display='flex' alignItems='center'>
                             <Typography variant='h5' align='center'>Sign in to see projects!</Typography>
                         </CardBox>
                     )

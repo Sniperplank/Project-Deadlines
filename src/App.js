@@ -36,7 +36,7 @@ function App() {
               <Route path='/about' element={<About />} />
               <Route path='/auth' element={<Auth />} />
             </Routes>
-            {currentPath === '/auth' || <RightSideLinks setIsDarkMode={setIsDarkMode} />}
+            {currentPath === '/auth' || <RightSideLinks isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
           </Stack>
         </Body>
       </ThemeProvider>
