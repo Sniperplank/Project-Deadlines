@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 import decode from 'jwt-decode'
 import { useAuth } from '../../contexts/AuthContext'
+import MobileMenu from './MobileMenu'
+import MenuIcon from '@mui/icons-material/Menu';
+import { StyledIconButton } from '../Styled MUI components/StyledIconButton'
 
 function TopAppBar() {
     const { user, setUser } = useAuth()
@@ -30,21 +33,24 @@ function TopAppBar() {
     return (
         <AppBar position='sticky'>
             <StyledToolbar>
-                <Stack spacing={1} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <Stack spacing={1}>
                     {
                         user && <>
                             <Avatar>{user.result.name.charAt(0)}</Avatar>
-                            <Typography variant='h6'>{user.result.name}</Typography>
+                            <Typography variant='h6' sx={{ display: { xs: 'none', sm: 'block' } }}>{user.result.name}</Typography>
                         </>
                     }
 
                 </Stack>
-                <Typography variant='h3' component={Link} to='/' color='primary' sx={{ textDecoration: 'none' }}>PROJECT DEADLINES</Typography>
+                <Typography variant='h3' component={Link} to='/' color='primary' sx={{ textDecoration: 'none', fontSize: { xs: 20, sm: 48 } }}>PROJECT DEADLINES</Typography>
                 {
                     user ?
-                        <StyledButton onClick={logout} variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Logout</StyledButton>
+                        <StyledButton onClick={logout} variant='contained' color='primary' sx={{ height: 50, float: 'right', display: { xs: 'none', sm: 'block' } }}>Logout</StyledButton>
                         : <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 50, float: 'right' }}>Sign in</StyledButton>
                 }
+                <StyledIconButton component={Link} to='/' sx={{ display: { xs: 'block', sm: 'none' } }}>
+                    <MenuIcon color='primary' />
+                </StyledIconButton>
             </StyledToolbar>
         </AppBar>
     )
