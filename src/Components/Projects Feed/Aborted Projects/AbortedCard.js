@@ -5,7 +5,7 @@ import { CardBox } from '../../Styled MUI components/CardBox'
 function AbortedCard() {
   return (
     <CardBox>
-      <Stack direction='row' spacing={4} justifyContent='space-between'>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} justifyContent='space-between'>
         <Stack spacing={4}>
           <Typography variant='h5'>Peoject Name</Typography>
           <Typography variant='body1'>Desc</Typography>
