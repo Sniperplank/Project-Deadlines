@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { StyledButton } from '../../Styled MUI components/StyledButton'
 import AddIcon from '@mui/icons-material/Add';
 import OngoingCard from '../Ongoing Projects/OngoingCard';
-import NewProjectModal from '../NewProjectModal';
+import NewProjectModal from './NewProjectModal';
 
 function OngoingProjects() {
     const [isNPModalOpen, setIsNPModalOpen] = useState(false)
