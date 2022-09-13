@@ -35,7 +35,7 @@ function MobileMenu({ logout, onClose }) {
             <MenuButton component={Link} to='/' onClick={onClose} variant='outlined' color='primary' startIcon={<HomeIcon />}>Home</MenuButton>
             <MenuButton component={Link} to='/about' onClick={onClose} variant='outlined' color='primary' startIcon={<InfoIcon />}>About</MenuButton>
             <MenuButton href="https://github.com/Sniperplank/Project-Deadlines" variant='outlined' color='primary' startIcon={<GitHubIcon />}>GitHub</MenuButton>
-            <Stack spacing={2} direction='row'>
+            <Stack justifyContent='space-around' direction='row'>
                 <StyledIconButton onClick={() => { setIsDarkMode(false) }}>
                     <LightModeIcon color={isDarkMode ? 'primary' : 'black'} />
                 </StyledIconButton>
