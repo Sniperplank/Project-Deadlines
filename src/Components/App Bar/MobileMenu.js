@@ -10,9 +10,12 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
 import { CardBox } from '../Styled MUI components/CardBox'
 import { StyledButton } from '../Styled MUI components/StyledButton'
+import { useTheme } from '../../contexts/ThemeContext'
+import { StyledIconButton } from '../Styled MUI components/StyledIconButton'
 
 function MobileMenu({ logout, onClose }) {
     const { user } = useAuth()
+    const { isDarkMode, setIsDarkMode } = useTheme()
 
     return (
         <Stack spacing={2} sx={{ display: { xs: 'flex', sm: 'none' } }}>
@@ -32,6 +35,14 @@ function MobileMenu({ logout, onClose }) {
             <MenuButton component={Link} to='/' onClick={onClose} variant='outlined' color='primary' startIcon={<HomeIcon />}>Home</MenuButton>
             <MenuButton component={Link} to='/about' onClick={onClose} variant='outlined' color='primary' startIcon={<InfoIcon />}>About</MenuButton>
             <MenuButton href="https://github.com/Sniperplank" variant='outlined' color='primary' startIcon={<GitHubIcon />}>GitHub</MenuButton>
+            <Stack spacing={2} direction='row'>
+                <StyledIconButton onClick={() => { setIsDarkMode(false) }}>
+                    <LightModeIcon color={isDarkMode ? 'primary' : 'black'} />
+                </StyledIconButton>
+                <StyledIconButton onClick={() => { setIsDarkMode(true) }}>
+                    <ModeNightIcon color={isDarkMode ? 'black' : 'primary'} />
+                </StyledIconButton>
+            </Stack>
             <hr></hr>
             {
                 user ?
