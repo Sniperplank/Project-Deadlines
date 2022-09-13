@@ -5,13 +5,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
+import { ModeProvider } from './contexts/ThemeContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <BrowserRouter>
-        <App />
+        <ModeProvider>
+          <App />
+        </ModeProvider>
       </BrowserRouter>
     </LocalizationProvider>
   </React.StrictMode>
