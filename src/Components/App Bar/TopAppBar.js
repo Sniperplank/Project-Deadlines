@@ -47,7 +47,7 @@ function TopAppBar() {
                 {
                     user ?
                         <StyledButton onClick={logout} variant='contained' color='primary' sx={{ height: 50, float: 'right', display: { xs: 'none', sm: 'block' } }}>Logout</StyledButton>
-                        : <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 50, float: 'right', display: { xs: 'none', sm: 'block' } }}>Sign in</StyledButton>
+                        : <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 50, float: 'right', display: { xs: 'none', sm: 'flex' } }}>Sign in</StyledButton>
                 }
                 <StyledIconButton onClick={() => setIsMenuModalOpen(!isMenuModalOpen)} sx={{ display: { xs: 'block', sm: 'none' } }}>
                     <MenuIcon color='primary' />
