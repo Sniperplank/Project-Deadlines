@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 //import { Dayjs } from 'dayjs';
@@ -14,7 +14,7 @@ function NewProjectModal({ open, onClose }) {
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
     const { user } = useAuth()
-    const [projectData, setProjectData] = useState({ name: '', description: '', startDate: startDate, dueDate: endDate, userEmail: user.result.email })
+    const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', dueDate: '', userEmail: user.result.email })
 
     const addProject = async () => {
         await axios.post('http://localhost:5000/projects/ongoing', projectData)
@@ -23,6 +23,10 @@ function NewProjectModal({ open, onClose }) {
     const handleChange = (e) => {
         setProjectData({ ...projectData, [e.target.name]: e.target.value })
     }
+
+    useEffect(()=>{
+        console.log(startDate)
+    }, [startDate])
 
     if (!open) return null
     return ReactDOM.createPortal(
@@ -35,12 +39,12 @@ function NewProjectModal({ open, onClose }) {
                     <StyledInput variant='outlined' name='description' label='Description' onChange={handleChange} />
                     <Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                            <StyledDesktopDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
-                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'flex', sm: 'none' } }}>
-                            <MobileDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
-                            <MobileDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                     </Stack>
                 </Stack>

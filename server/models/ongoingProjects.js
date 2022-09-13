@@ -1,11 +1,11 @@
 import mongoose from "mongoose"
 
 const ongoingProjectsSchema = mongoose.Schema({
-    name: { type: String, required: true },
+    name: { type: String },
     description: { type: String },
-    startDate: { type: Date, required: true },
-    dueDate: { type: Date, required: true },
-    userEmail: { type: String, required: true },
+    startDate: { type: String },
+    dueDate: { type: String },
+    userEmail: { type: String },
     id: { type: String }
 })
 

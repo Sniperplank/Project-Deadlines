@@ -1,9 +1,19 @@
 import { Stack, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CardBox } from '../../Styled MUI components/CardBox'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 function OngoingCard() {
+
+  useEffect(() => {
+    async function getProjectInfo() {
+      const projectInfo = await axios.get('http://localhost:5000/projects/ongoing')
+      console.log(projectInfo)
+    }
+    getProjectInfo()
+  })
+
   return (
     <CardBox component={Link} to='/ongoing/:projectName'>
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} justifyContent='space-between'>
