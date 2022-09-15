@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useAuth } from '../../../contexts/AuthContext'
-//import { Dayjs } from 'dayjs';
 import { Button, Stack, Typography } from '@mui/material'
 import { MobileDatePicker } from '@mui/x-date-pickers'
 import { ModalContent } from '../../Styled MUI components/ModalContent'
@@ -25,18 +24,18 @@ function NewProjectModal({ open, onClose }) {
     }
 
     const handleStartDateChange = (e) => {
-        setStartDate(e) 
-        setProjectData({...projectData, startDate: startDate._d})
+        setStartDate(e._d) 
+        setProjectData({...projectData, startDate: startDate})
     }
 
     const handleEndDateChange = (e) => {
-        setEndDate(e) 
+        setEndDate(e._d) 
         setProjectData({...projectData, dueDate: endDate})
     }
 
-    useEffect(()=>{
-        console.log(startDate)
-    }, [startDate])
+    // useEffect(()=>{
+    //     console.log(startDate)
+    // }, [startDate])
 
     if (!open) return null
     return ReactDOM.createPortal(
