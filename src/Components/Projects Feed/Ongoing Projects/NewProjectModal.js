@@ -24,6 +24,16 @@ function NewProjectModal({ open, onClose }) {
         setProjectData({ ...projectData, [e.target.name]: e.target.value })
     }
 
+    const handleStartDateChange = (e) => {
+        setStartDate(e) 
+        setProjectData({...projectData, startDate: startDate._d})
+    }
+
+    const handleEndDateChange = (e) => {
+        setEndDate(e) 
+        setProjectData({...projectData, dueDate: endDate})
+    }
+
     useEffect(()=>{
         console.log(startDate)
     }, [startDate])
@@ -39,12 +49,12 @@ function NewProjectModal({ open, onClose }) {
                     <StyledInput variant='outlined' name='description' label='Description' onChange={handleChange} />
                     <Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                            <StyledDesktopDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
-                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='Start Date' name='startDate' value={startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={endDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'flex', sm: 'none' } }}>
-                            <MobileDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
-                            <MobileDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue.format('YYYY/MM/DD')) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                     </Stack>
                 </Stack>
