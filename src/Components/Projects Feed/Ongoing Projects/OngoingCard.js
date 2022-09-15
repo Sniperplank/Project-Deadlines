@@ -1,29 +1,20 @@
 import { Stack, Typography } from '@mui/material'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { CardBox } from '../../Styled MUI components/CardBox'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import moment from 'moment'
 
-function OngoingCard() {
-
-  useEffect(() => {
-    async function getProjectInfo() {
-      const projectInfo = await axios.get('http://localhost:5000/projects/ongoing')
-      console.log(projectInfo)
-    }
-    getProjectInfo()
-  })
-
+function OngoingCard({ project }) {
   return (
-    <CardBox component={Link} to='/ongoing/:projectName'>
+    <CardBox component={Link} to={project.name}>
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} justifyContent='space-between'>
         <Stack spacing={4}>
-          <Typography variant='h5'>Peoject Name</Typography>
-          <Typography variant='body1'></Typography>
+          <Typography variant='h5'>{project.name}</Typography>
+          <Typography variant='body1'>{project.description}</Typography>
         </Stack>
         <Stack spacing={4}>
-          <Typography variant='h6'>Started On: {Date.now()}</Typography>
-          <Typography variant='h6'>Due By:</Typography>
+          <Typography variant='h6'>Started On: {moment(project.startDate).format("MMM Do YYYY")}</Typography>
+          <Typography variant='h6'>Due By: {moment(project.dueDate).format("MMM Do YYYY")}</Typography>
         </Stack>
       </Stack>
     </CardBox>

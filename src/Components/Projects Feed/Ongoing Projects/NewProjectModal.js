@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { Button, Stack, Typography } from '@mui/material'
@@ -32,10 +32,6 @@ function NewProjectModal({ open, onClose }) {
         setEndDate(e._d) 
         setProjectData({...projectData, dueDate: endDate})
     }
-
-    // useEffect(()=>{
-    //     console.log(startDate)
-    // }, [startDate])
 
     if (!open) return null
     return ReactDOM.createPortal(
