@@ -6,7 +6,7 @@ import moment from 'moment'
 
 function OngoingCard({ project }) {
   return (
-    <CardBox component={Link} to={project.name}>
+    <CardBox component={Link} to={project._id}>
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} justifyContent='space-between'>
         <Stack spacing={4}>
           <Typography variant='h5'>{project.name}</Typography>

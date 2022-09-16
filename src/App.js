@@ -31,7 +31,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<></>} />
                 <Route path='/ongoing' element={<OngoingProjects />} />
-                <Route path='/ongoing/:projectName' element={<OngoingOpenCard />} />
+                <Route path='/ongoing/:projectId' element={<OngoingOpenCard />} />
                 <Route path='/finished' element={<FinishedProjects />} />
                 <Route path='/aborted' element={<AbortedProjects />} />
                 <Route path='/about' element={<About />} />

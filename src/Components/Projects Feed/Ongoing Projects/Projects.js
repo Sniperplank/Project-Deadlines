@@ -17,7 +17,6 @@ function Projects() {
     })
 
     return (
-
         !projects.length ?
             <CircularProgress size={50}/>
             : (
@@ -33,7 +32,6 @@ function Projects() {
                     }
                 </>
             )
-
     )
 }
 
