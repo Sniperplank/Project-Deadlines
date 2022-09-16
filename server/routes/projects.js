@@ -32,5 +32,15 @@ router.get('/ongoing/id', async (req, res) => {
     }
 })
 
+router.post('/ongoing/tasks', async (req, res) => {
+    const { description, projectId } = req.body
+    try {
+        const result = await ongoingProjects.create({ description, projectId })
+        res.status(200).json({ result })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
+})
+
 
 export default router
