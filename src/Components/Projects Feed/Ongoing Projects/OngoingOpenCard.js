@@ -53,15 +53,6 @@ function OngoingOpenCard() {
                             <Grid item xs={12} sm={12} md={6}>
                                 <Task />
                             </Grid>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <Task />
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <Task />
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <Task />
-                            </Grid>
                         </Grid>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
                             <StyledButton variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
