@@ -4,13 +4,13 @@ import { CardBox } from '../../Styled MUI components/CardBox'
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import { StyledIconButton } from '../../Styled MUI components/StyledIconButton';
-import '../../../App.css'
 import Task from './Task';
 import { StyledButton } from '../../Styled MUI components/StyledButton';
 import { useParams } from 'react-router-dom';
 import moment from 'moment'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import '../../../App.css'
 
 function OngoingOpenCard() {
     const { projectId } = useParams()
