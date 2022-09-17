@@ -11,10 +11,12 @@ import moment from 'moment'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import '../../../App.css'
+import TaskModal from './TaskModal';
 
 function OngoingOpenCard() {
     const { projectId } = useParams()
     const [project, setProject] = useState({})
+    const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
 
     useEffect(() => {
         async function getProjectInfo() {
@@ -47,8 +49,9 @@ function OngoingOpenCard() {
                         </CardBox>
                         <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
                             <Typography variant='h5'>ToDo Tasks:</Typography>
-                            <StyledButton variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
+                            <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
                         </Stack>
+                        <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} />
                         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={6}>
                             <Grid item xs={12} sm={12} md={6}>
                                 <Task />
