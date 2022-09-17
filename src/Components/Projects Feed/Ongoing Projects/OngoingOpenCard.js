@@ -51,7 +51,7 @@ function OngoingOpenCard() {
                             <Typography variant='h5'>ToDo Tasks:</Typography>
                             <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
                         </Stack>
-                        <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} />
+                        <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project}/>
                         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={6}>
                             <Grid item xs={12} sm={12} md={6}>
                                 <Task />
