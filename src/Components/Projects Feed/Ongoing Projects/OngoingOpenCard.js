@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from '@mui/material'
+import { Box, CircularProgress, Grid, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { CardBox } from '../../Styled MUI components/CardBox'
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,12 +16,15 @@ import TaskModal from './TaskModal';
 function OngoingOpenCard() {
     const { projectId } = useParams()
     const [project, setProject] = useState({})
+    const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
 
     useEffect(() => {
         async function getProjectInfo() {
             const projectInfo = await axios.get('http://localhost:5000/projects/ongoing/id?_id=' + projectId)
+            const tasksData = await axios.get('http://localhost:5000/projects/ongoing/tasks/projectId?projectId=' + projectId)
             setProject(projectInfo.data[0])
+            setTasks(tasksData.data.result)
         }
         getProjectInfo()
     })
@@ -51,12 +54,24 @@ function OngoingOpenCard() {
                             <Typography variant='h5'>ToDo Tasks:</Typography>
                             <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
                         </Stack>
-                        <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project}/>
-                        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={6}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <Task />
-                            </Grid>
-                        </Grid>
+                        <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} />
+                        {
+                            !tasks.length ?
+                                <CircularProgress size={40} sx={{ alignSelf: 'center' }} />
+                                : (
+                                    <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={6}>
+                                        {
+                                            Object.entries(tasks).map(([key, value]) => {
+                                                return (
+                                                    <Grid item xs={12} sm={12} md={6} key={key}>
+                                                        <Task task={value} />
+                                                    </Grid>
+                                                )
+                                            })
+                                        }
+                                    </Grid>
+                                )
+                        }
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
                             <StyledButton variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
                             <StyledButton variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Aborte Project</StyledButton>

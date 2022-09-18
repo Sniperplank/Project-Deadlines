@@ -5,13 +5,12 @@ import { ModalContent } from '../../Styled MUI components/ModalContent'
 import { ModalOverlay } from '../../Styled MUI components/ModalOverlay'
 import { StyledInput } from '../../Styled MUI components/StyledInput'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 function TaskModal({ open, onClose, project }) {
     const [taskData, setTaskData] = useState({ description: '', projectId: project._id })
 
     const handleChange = (e) => {
-        setTaskData({ ...taskData, [e.target.name]: e.target.value })
+        setTaskData({ description: e.target.value, projectId: project._id })
     }
 
     const addTask = async () => {

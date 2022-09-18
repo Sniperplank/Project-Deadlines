@@ -43,9 +43,10 @@ router.post('/ongoing/tasks', async (req, res) => {
     }
 })
 
-router.get('/ongoing/tasks', async (req, res) => {
+router.get('/ongoing/tasks/projectId', async (req, res) => {
+    const { projectId } = req.query
     try {
-        const result = await task.find()
+        const result = await task.find({ projectId: { $eq: projectId} })
         res.status(200).json({ result })
     } catch (error) {
         res.status(500).json({ message: error.message })
