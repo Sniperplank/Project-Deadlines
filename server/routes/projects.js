@@ -16,17 +16,17 @@ router.post('/ongoing', async (req, res) => {
 router.get('/ongoing', async (req, res) => {
     const { userEmail } = req.query
     try {
-        const projects = await ongoingProjects.find({ userEmail: { $eq: userEmail} })
+        const projects = await ongoingProjects.find({ userEmail: { $eq: userEmail } })
         res.status(200).json(projects)
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
 })
 
-router.get('/ongoing/id', async (req, res) => {
-    const { _id } = req.query
+router.get('/ongoing/:_id', async (req, res) => {
+    const { _id } = req.params
     try {
-        const project = await ongoingProjects.find({ _id: { $eq: _id} })
+        const project = await ongoingProjects.find({ _id: { $eq: _id } })
         res.status(200).json(project)
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -43,14 +43,20 @@ router.post('/ongoing/tasks', async (req, res) => {
     }
 })
 
-router.get('/ongoing/tasks/projectId', async (req, res) => {
-    const { projectId } = req.query
+router.get('/ongoing/tasks/:projectId', async (req, res) => {
+    const { projectId } = req.params
     try {
-        const result = await task.find({ projectId: { $eq: projectId} })
+        const result = await task.find({ projectId: { $eq: projectId } })
         res.status(200).json({ result })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
+})
+
+router.delete('/ongoing/tasks/deleteTask', async (req, res) => {
+    const { _id } = req.query
+    await task.findOneAndDelete({ _id: { $eq: _id } })
+    res.json({ message: 'Post deleted succesfully' })
 })
 
 

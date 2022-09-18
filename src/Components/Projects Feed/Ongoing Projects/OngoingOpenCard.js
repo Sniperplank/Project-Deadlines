@@ -21,8 +21,8 @@ function OngoingOpenCard() {
 
     useEffect(() => {
         async function getProjectInfo() {
-            const projectInfo = await axios.get('http://localhost:5000/projects/ongoing/id?_id=' + projectId)
-            const tasksData = await axios.get('http://localhost:5000/projects/ongoing/tasks/projectId?projectId=' + projectId)
+            const projectInfo = await axios.get('http://localhost:5000/projects/ongoing/' + projectId)
+            const tasksData = await axios.get('http://localhost:5000/projects/ongoing/tasks/' + projectId)
             setProject(projectInfo.data[0])
             setTasks(tasksData.data.result)
         }

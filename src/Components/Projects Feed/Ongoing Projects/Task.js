@@ -4,16 +4,25 @@ import { GridItem } from '../../Styled MUI components/GridItem'
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { StyledIconButton } from '../../Styled MUI components/StyledIconButton';
+import axios from 'axios';
 
 function Task({ task }) {
+    const finishTask = async () => {
+        await axios.delete('http://localhost:5000/projects/ongoing/tasks/deleteTask?_id=' + task._id)
+    }
+
+    const deleteTask = async () => {
+        await axios.delete('http://localhost:5000/projects/ongoing/tasks/deleteTask?_id=' + task._id)
+    }
+
     return (
         <GridItem>
-            <Typography variant='h6'>{task.description}</Typography>
+            <Typography variant='body1'>{task.description}</Typography>
             <Stack direction='row' spacing={2} justifyContent='right'>
-                <StyledIconButton>
+                <StyledIconButton onClick={finishTask}>
                     <CheckIcon color='primary' />
                 </StyledIconButton>
-                <StyledIconButton>
+                <StyledIconButton onClick={deleteTask}>
                     <DeleteIcon color='primary' />
                 </StyledIconButton>
             </Stack>
