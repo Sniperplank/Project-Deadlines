@@ -19,6 +19,14 @@ function OngoingOpenCard() {
     const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
 
+    const finishProject = () => {
+
+    }
+
+    const abortProject = () => {
+        
+    }
+
     useEffect(() => {
         async function getProjectInfo() {
             const projectInfo = await axios.get('http://localhost:5000/projects/ongoing/' + projectId)
@@ -73,8 +81,8 @@ function OngoingOpenCard() {
                                 )
                         }
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
-                            <StyledButton variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
-                            <StyledButton variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Aborte Project</StyledButton>
+                            <StyledButton onClick={finishProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
+                            <StyledButton onClick={abortProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Aborte Project</StyledButton>
                         </Stack>
                         <StyledButton component={Link} to='/ongoing' variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Back</StyledButton>
                     </Stack>
