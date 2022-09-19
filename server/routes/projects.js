@@ -1,6 +1,7 @@
 import express from "express";
 import ongoingProjects from "../models/ongoingProjects.js";
 import finishedProjects from "../models/finishedProjects.js";
+import abortedProjects from "../models/abortedProjects.js";
 import task from "../models/task.js";
 const router = express.Router()
 
@@ -80,6 +81,26 @@ router.get('/finished', async (req, res) => {
     const { userEmail } = req.query
     try {
         const projects = await finishedProjects.find({ userEmail: { $eq: userEmail } })
+        res.status(200).json(projects)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+})
+
+router.post('/aborted', async (req, res) => {
+    const { name, description, startDate, endDate, userEmail } = req.body
+    try {
+        const result = await abortedProjects.create({ name, description, startDate, endDate, userEmail })
+        res.status(200).json({ result })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+router.get('/aborted', async (req, res) => {
+    const { userEmail } = req.query
+    try {
+        const projects = await abortedProjects.find({ userEmail: { $eq: userEmail } })
         res.status(200).json(projects)
     } catch (error) {
         res.status(404).json({ message: error.message })
