@@ -10,8 +10,6 @@ import { StyledDesktopDatePicker } from '../../Styled MUI components/StyledDateP
 import axios from 'axios'
 
 function NewProjectModal({ open, onClose }) {
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
     const { user } = useAuth()
     const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', dueDate: '', userEmail: user.result.email })
 
@@ -24,13 +22,11 @@ function NewProjectModal({ open, onClose }) {
     }
 
     const handleStartDateChange = (e) => {
-        setStartDate(e._d) 
-        setProjectData({...projectData, startDate: startDate})
+        setProjectData({...projectData, startDate: e._d})
     }
 
     const handleEndDateChange = (e) => {
-        setEndDate(e._d) 
-        setProjectData({...projectData, dueDate: endDate})
+        setProjectData({...projectData, dueDate: e._d})
     }
 
     if (!open) return null
@@ -44,12 +40,12 @@ function NewProjectModal({ open, onClose }) {
                     <StyledInput variant='outlined' name='description' label='Description' onChange={handleChange} />
                     <Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                            <StyledDesktopDatePicker label='Start Date' name='startDate' value={startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
-                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={endDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='Start Date' name='startDate' value={projectData.startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'flex', sm: 'none' } }}>
-                            <MobileDatePicker label='Start Date' name='startDate' value={startDate} onChange={(newValue) => { setStartDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
-                            <MobileDatePicker label='End Date' name='dueDate' value={endDate} onChange={(newValue) => { setEndDate(newValue) }} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='Start Date' name='startDate' value={projectData.startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='End Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                     </Stack>
                 </Stack>
