@@ -5,17 +5,18 @@ import { ModalContent } from '../../Styled MUI components/ModalContent'
 import { ModalOverlay } from '../../Styled MUI components/ModalOverlay'
 import { StyledInput } from '../../Styled MUI components/StyledInput'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 function DescEditModal({ open, onClose, project }) {
+    const { projectId } = useParams()
     const [description, setDescription] = useState(project.description)
 
     const handleChange = (e) => {
         setDescription(e.target.value)
     }
 
-    const addTask = async () => {
-        //await axios.post('http://localhost:5000/projects/ongoing/tasks', taskData)
-        console.log(description)
+    const updateDesc = async () => {
+        await axios.patch('http://localhost:5000/projects/ongoing/' + projectId, { ...project, description: description })
     }
 
     if (!open) return null
@@ -30,8 +31,8 @@ function DescEditModal({ open, onClose, project }) {
                 <Stack direction='row' spacing={2} marginTop={3} justifyContent='right'>
                     <Button variant='contained' color='primary' onClick={() => {
                         onClose()
-                        addTask()
-                    }}>Add</Button>
+                        updateDesc()
+                    }}>Save</Button>
                     <Button variant='contained' color='error' onClick={onClose}>Cancel</Button>
                 </Stack>
             </ModalContent>

@@ -67,6 +67,13 @@ router.delete('/ongoing/:_id', async (req, res) => {
     res.json({ message: 'Project deleted succesfully' })
 })
 
+router.patch('/ongoing/:_id', async (req, res) => {
+    const { _id } = req.params
+    const project = req.body
+    await ongoingProjects.findByIdAndUpdate(_id, { ...project }, { new: true })
+    res.json({ message: 'Project updated succesfully' })
+})
+
 router.post('/finished', async (req, res) => {
     const { name, description, startDate, endDate, userEmail } = req.body
     try {
