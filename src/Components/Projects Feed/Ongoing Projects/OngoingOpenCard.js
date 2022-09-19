@@ -9,22 +9,28 @@ import { StyledButton } from '../../Styled MUI components/StyledButton';
 import { useParams } from 'react-router-dom';
 import moment from 'moment'
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../../App.css'
 import TaskModal from './TaskModal';
+import { useAuth } from '../../../contexts/AuthContext';
 
 function OngoingOpenCard() {
+    const { user } = useAuth()
     const { projectId } = useParams()
     const [project, setProject] = useState({})
     const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
+    const navigate = useNavigate()
 
-    const finishProject = () => {
-
+    const finishProject = async () => {
+        navigate('/ongoing')
+        await axios.post('http://localhost:5000/projects/finished', { name: project.name, description: project.description, startDate: project.startDate, endDate: moment(), userEmail: user.result.email })
+        await axios.delete('http://localhost:5000/projects/ongoing/' + projectId)
     }
 
-    const abortProject = () => {
-        
+    const abortProject = async () => {
+        navigate('/ongoing')
+        await axios.delete('http://localhost:5000/projects/ongoing/' + projectId)
     }
 
     useEffect(() => {
