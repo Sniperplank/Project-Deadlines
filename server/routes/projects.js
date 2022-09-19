@@ -88,9 +88,9 @@ router.get('/finished', async (req, res) => {
 })
 
 router.post('/aborted', async (req, res) => {
-    const { name, description, startDate, endDate, userEmail } = req.body
+    const { name, description, startDate, abortDate, userEmail } = req.body
     try {
-        const result = await abortedProjects.create({ name, description, startDate, endDate, userEmail })
+        const result = await abortedProjects.create({ name, description, startDate, abortDate, userEmail })
         res.status(200).json({ result })
     } catch (error) {
         res.status(500).json({ message: error.message })

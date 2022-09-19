@@ -30,6 +30,7 @@ function OngoingOpenCard() {
 
     const abortProject = async () => {
         navigate('/ongoing')
+        await axios.post('http://localhost:5000/projects/aborted', { name: project.name, description: project.description, startDate: project.startDate, abortDate: moment(), userEmail: user.result.email })
         await axios.delete('http://localhost:5000/projects/ongoing/' + projectId)
     }
 
