@@ -6,15 +6,16 @@ import { ModalOverlay } from '../../Styled MUI components/ModalOverlay'
 import { StyledInput } from '../../Styled MUI components/StyledInput'
 import axios from 'axios'
 
-function TaskModal({ open, onClose, project }) {
-    const [taskData, setTaskData] = useState({ description: '', projectId: project._id })
+function DescEditModal({ open, onClose, project }) {
+    const [description, setDescription] = useState(project.description)
 
     const handleChange = (e) => {
-        setTaskData({ description: e.target.value, projectId: project._id })
+        setDescription(e.target.value)
     }
 
     const addTask = async () => {
-        await axios.post('http://localhost:5000/projects/ongoing/tasks', taskData)
+        //await axios.post('http://localhost:5000/projects/ongoing/tasks', taskData)
+        console.log(description)
     }
 
     if (!open) return null
@@ -22,9 +23,9 @@ function TaskModal({ open, onClose, project }) {
         <>
             <ModalOverlay onClick={onClose} />
             <ModalContent sx={{ minWidth: {xs: 0, sm: 400} }}>
-                <Typography variant='h4'>New Task</Typography>
+                <Typography variant='h5'>Edit Description</Typography>
                 <Stack spacing={3} marginTop={2} marginBottom={2}>
-                    <StyledInput variant='outlined' name='description' label='Task Description' onChange={handleChange} />
+                    <StyledInput variant='outlined' name='description' value={description} onChange={handleChange} />
                 </Stack>
                 <Stack direction='row' spacing={2} marginTop={3} justifyContent='right'>
                     <Button variant='contained' color='primary' onClick={() => {
@@ -39,4 +40,4 @@ function TaskModal({ open, onClose, project }) {
     )
 }
 
-export default TaskModal
+export default DescEditModal

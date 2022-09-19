@@ -41,11 +41,11 @@ function NewProjectModal({ open, onClose }) {
                     <Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'none', sm: 'flex' } }}>
                             <StyledDesktopDatePicker label='Start Date' name='startDate' value={projectData.startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
-                            <StyledDesktopDatePicker label='End Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
+                            <StyledDesktopDatePicker label='Due Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                         <Stack direction="row" spacing={3} sx={{ display: { xs: 'flex', sm: 'none' } }}>
                             <MobileDatePicker label='Start Date' name='startDate' value={projectData.startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
-                            <MobileDatePicker label='End Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
+                            <MobileDatePicker label='Due Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
                     </Stack>
                 </Stack>

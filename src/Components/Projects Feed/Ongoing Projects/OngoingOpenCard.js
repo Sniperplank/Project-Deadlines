@@ -12,6 +12,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
 import '../../../App.css'
 import TaskModal from './TaskModal';
+import EditModal from './EditModal';
 import { useAuth } from '../../../contexts/AuthContext';
 
 function OngoingOpenCard() {
@@ -20,6 +21,7 @@ function OngoingOpenCard() {
     const [project, setProject] = useState({})
     const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const navigate = useNavigate()
 
     const finishProject = async () => {
@@ -58,13 +60,14 @@ function OngoingOpenCard() {
                         <CardBox border={2} sx={{ borderColor: 'primary.main' }}>
                             <Stack direction='row' justifyContent='space-between'>
                                 <Typography variant='h5'>Description:</Typography>
-                                <StyledIconButton>
+                                <StyledIconButton onClick={() => setIsEditModalOpen(true)}>
                                     <EditIcon color='primary' />
                                 </StyledIconButton>
                             </Stack>
                             <br></br>
                             <Typography variant='body1'>{project.description}</Typography>
                         </CardBox>
+                        <EditModal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} project={project} />
                         <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
                             <Typography variant='h5'>ToDo Tasks:</Typography>
                             <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
