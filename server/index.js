@@ -17,7 +17,7 @@ app.use('/user', userRoutes)
 app.use('/projects', projectRoutes)
 
 app.get('/', (req, res) => {
-    res.send('backend works')
+    res.send('project-deadlines api')
 })
 
 const PORT = process.env.PORT || 5000
