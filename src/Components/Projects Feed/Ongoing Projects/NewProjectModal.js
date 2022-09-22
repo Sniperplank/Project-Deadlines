@@ -14,7 +14,7 @@ function NewProjectModal({ open, onClose }) {
     const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', dueDate: '', userEmail: user.result.email })
 
     const addProject = async () => {
-        await axios.post('http://localhost:5000/projects/ongoing', projectData)
+        await axios.post('https://project-deadlines.herokuapp.com/projects/ongoing', projectData)
     }
 
     const handleChange = (e) => {

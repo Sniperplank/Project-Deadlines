@@ -26,20 +26,20 @@ function OngoingOpenCard() {
 
     const finishProject = async () => {
         navigate('/ongoing')
-        await axios.post('http://localhost:5000/projects/finished', { name: project.name, description: project.description, startDate: project.startDate, endDate: moment(), userEmail: user.result.email })
-        await axios.delete('http://localhost:5000/projects/ongoing/' + projectId)
+        await axios.post('https://project-deadlines.herokuapp.com/projects/finished', { name: project.name, description: project.description, startDate: project.startDate, endDate: moment(), userEmail: user.result.email })
+        await axios.delete('https://project-deadlines.herokuapp.com/projects/ongoing/' + projectId)
     }
 
     const abortProject = async () => {
         navigate('/ongoing')
-        await axios.post('http://localhost:5000/projects/aborted', { name: project.name, description: project.description, startDate: project.startDate, abortDate: moment(), userEmail: user.result.email })
-        await axios.delete('http://localhost:5000/projects/ongoing/' + projectId)
+        await axios.post('https://project-deadlines.herokuapp.com/projects/aborted', { name: project.name, description: project.description, startDate: project.startDate, abortDate: moment(), userEmail: user.result.email })
+        await axios.delete('https://project-deadlines.herokuapp.com/projects/ongoing/' + projectId)
     }
 
     useEffect(() => {
         async function getProjectInfo() {
-            const projectInfo = await axios.get('http://localhost:5000/projects/ongoing/' + projectId)
-            const tasksData = await axios.get('http://localhost:5000/projects/ongoing/tasks/' + projectId)
+            const projectInfo = await axios.get('https://project-deadlines.herokuapp.com/projects/ongoing/' + projectId)
+            const tasksData = await axios.get('https://project-deadlines.herokuapp.com/projects/ongoing/tasks/' + projectId)
             setProject(projectInfo.data[0])
             setTasks(tasksData.data.result)
         }

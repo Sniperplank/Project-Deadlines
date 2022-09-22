@@ -8,11 +8,11 @@ import axios from 'axios';
 
 function Task({ task }) {
     const finishTask = async () => {
-        await axios.delete('http://localhost:5000/projects/ongoing/tasks/deleteTask?_id=' + task._id)
+        await axios.delete('https://project-deadlines.herokuapp.com/projects/ongoing/tasks/deleteTask?_id=' + task._id)
     }
 
     const deleteTask = async () => {
-        await axios.delete('http://localhost:5000/projects/ongoing/tasks/deleteTask?_id=' + task._id)
+        await axios.delete('https://project-deadlines.herokuapp.com/projects/ongoing/tasks/deleteTask?_id=' + task._id)
     }
 
     return (

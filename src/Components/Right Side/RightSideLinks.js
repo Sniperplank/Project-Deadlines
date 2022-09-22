@@ -18,7 +18,7 @@ function RightSideLinks({ isDarkMode, setIsDarkMode }) {
                 <StyledIconButton component={Link} to='/about'>
                     <InfoIcon color='primary' />
                 </StyledIconButton>
-                <StyledIconButton href="https://github.com/Sniperplank">
+                <StyledIconButton href="https://github.com/Sniperplank/Project-Deadlines">
                     <GitHubIcon color='primary' />
                 </StyledIconButton>
                 <StyledIconButton onClick={() => { setIsDarkMode(false) }}>
