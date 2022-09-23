@@ -21,27 +21,30 @@ function App() {
   const location = useLocation()
   const currentPath = location.pathname
 
+
+  document.body.style.backgroundColor = isDarkMode ? '#0e0b04' : '#faf6ed'
+  document.body.style.color = isDarkMode ? '#b6b4b4' : '#3b3b3b'
   return (
-      <AuthProvider>
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-          <Body>
-            <TopAppBar />
-            <Stack direction="row" spacing={2} justifyContent="space-between" height="100vh" width="100vw">
-              {currentPath === '/auth' || <LeftNavbar />}
-              <Routes>
-                <Route path='/' element={<></>} />
-                <Route path='/ongoing' element={<OngoingProjects />} />
-                <Route path='/ongoing/:projectId' element={<OngoingOpenCard />} />
-                <Route path='/finished' element={<FinishedProjects />} />
-                <Route path='/aborted' element={<AbortedProjects />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/auth' element={<Auth />} />
-              </Routes>
-              {currentPath === '/auth' || <RightSideLinks isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
-            </Stack>
-          </Body>
-        </ThemeProvider>
-      </AuthProvider>
+    <AuthProvider>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <Body>
+          <TopAppBar />
+          <Stack direction="row" spacing={2} justifyContent="space-between" height="100vh" width="100vw">
+            {currentPath === '/auth' || <LeftNavbar />}
+            <Routes>
+              <Route path='/' element={<></>} />
+              <Route path='/ongoing' element={<OngoingProjects />} />
+              <Route path='/ongoing/:projectId' element={<OngoingOpenCard />} />
+              <Route path='/finished' element={<FinishedProjects />} />
+              <Route path='/aborted' element={<AbortedProjects />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/auth' element={<Auth />} />
+            </Routes>
+            {currentPath === '/auth' || <RightSideLinks isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
+          </Stack>
+        </Body>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
