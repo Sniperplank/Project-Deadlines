@@ -1,4 +1,4 @@
-## Project Deadlines
+# Project Deadlines
 
-# App: 
+## App: 
 https://project-deadlines.vercel.app/
