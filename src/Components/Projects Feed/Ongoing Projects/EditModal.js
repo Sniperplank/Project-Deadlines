@@ -16,7 +16,7 @@ function DescEditModal({ open, onClose, project }) {
     }
 
     const updateDesc = async () => {
-        await axios.patch('https://project-deadlines.herokuapp.com/projects/ongoing/' + projectId, { ...project, description: description })
+        await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId, { ...project, description: description })
     }
 
     if (!open) return null

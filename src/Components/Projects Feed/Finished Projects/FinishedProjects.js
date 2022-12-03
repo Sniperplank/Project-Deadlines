@@ -10,7 +10,7 @@ function FinishedProjects() {
 
     useEffect(() => {
         async function getProjectInfo() {
-            const projectInfo = await axios.get('https://project-deadlines.herokuapp.com/projects/finished?userEmail=' + user.result.email)
+            const projectInfo = await axios.get('https://project-deadlines-server.vercel.app/projects/finished?userEmail=' + user.result.email)
             setProjects(projectInfo.data)
         }
         getProjectInfo()

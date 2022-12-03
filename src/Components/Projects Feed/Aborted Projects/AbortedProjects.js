@@ -10,7 +10,7 @@ function AbortedProjects() {
 
     useEffect(() => {
         async function getProjectInfo() {
-            const projectInfo = await axios.get('https://project-deadlines.herokuapp.com/projects/aborted?userEmail=' + user.result.email)
+            const projectInfo = await axios.get('https://project-deadlines-server.vercel.app/projects/aborted?userEmail=' + user.result.email)
             setProjects(projectInfo.data)
         }
         getProjectInfo()
