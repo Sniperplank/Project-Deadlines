@@ -14,7 +14,7 @@ function TaskModal({ open, onClose, project }) {
     }
 
     const addTask = async () => {
-        await axios.post('https://project-deadlines.herokuapp.com/projects/ongoing/tasks', taskData)
+        await axios.post('https://project-deadlines-server.vercel.app/projects/ongoing/tasks', taskData)
     }
 
     if (!open) return null

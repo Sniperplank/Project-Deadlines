@@ -14,7 +14,7 @@ function OngoingProjects() {
 
     useEffect(() => {
         async function getProjectInfo() {
-            const projectInfo = await axios.get('https://project-deadlines.herokuapp.com/projects/ongoing?userEmail=' + user.result.email)
+            const projectInfo = await axios.get('https://project-deadlines-server.vercel.app/projects/ongoing?userEmail=' + user.result.email)
             setProjects(projectInfo.data)
         }
         getProjectInfo()
