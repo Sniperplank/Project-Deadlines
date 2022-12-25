@@ -1,4 +1,4 @@
-import { AppBar, Typography, Avatar, Stack } from '@mui/material'
+import { AppBar, Typography, Avatar, Stack, Menu, MenuItem, Divider, ListItemIcon } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { StyledButton } from '../Styled MUI components/StyledButton'
 import { StyledToolbar } from '../Styled MUI components/StyledToolbar'
@@ -15,13 +15,24 @@ import InfoIcon from '@mui/icons-material/Info';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import Logout from '@mui/icons-material/Logout';
 
 function TopAppBar() {
     const { user, setUser } = useAuth()
     const { isDarkMode, setIsDarkMode } = useTheme()
     const [isMenuModalOpen, setIsMenuModalOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
     const navigate = useNavigate()
     const location = useLocation()
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const logout = () => {
         localStorage.clear()
@@ -70,7 +81,61 @@ function TopAppBar() {
                             <StyledIconButton onClick={() => { setIsDarkMode(prev => !prev) }}>
                                 {isDarkMode ? <LightModeIcon color={'primary'} /> : <ModeNightIcon color={'primary'} />}
                             </StyledIconButton>
-                            <Avatar>{user.result.name.charAt(0)}</Avatar>
+                            <StyledIconButton onClick={handleClick}
+                                sx={{ ml: 2 }}
+                                aria-controls={open ? 'account-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}>
+                                <Avatar>{user.result.name.charAt(0)}</Avatar>
+                            </StyledIconButton>
+                            <Menu
+                                anchorEl={anchorEl}
+                                id="account-menu"
+                                open={open}
+                                onClose={handleClose}
+                                onClick={handleClose}
+                                PaperProps={{
+                                    elevation: 0,
+                                    sx: {
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
+                                        backgroundColor: 'secondary.light',
+                                        color: 'text.main',
+                                        '& .MuiAvatar-root': {
+                                            width: 32,
+                                            height: 32,
+                                            ml: -0.5,
+                                            mr: 1,
+                                        },
+                                        '&:before': {
+                                            content: '""',
+                                            display: 'block',
+                                            position: 'absolute',
+                                            top: 0,
+                                            right: 14,
+                                            width: 10,
+                                            height: 10,
+                                            bgcolor: 'secondary.light',
+                                            transform: 'translateY(-50%) rotate(45deg)',
+                                            zIndex: 0,
+                                        },
+                                    },
+                                }}
+                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                            >
+                                <MenuItem>
+                                    <Avatar /> {user.result.name}
+                                </MenuItem>
+                                <Divider />
+                                <MenuItem onClick={logout}>
+                                    <ListItemIcon>
+                                        <Logout color='primary' />
+                                    </ListItemIcon>
+                                    Logout
+                                </MenuItem>
+                            </Menu>
                             {/* <StyledButton onClick={logout} variant='contained' color='primary' sx={{ height: 50, float: 'right', display: { xs: 'none', sm: 'block' } }}>Logout</StyledButton> */}
                         </Stack>
                         : <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 40, display: { xs: 'none', sm: 'flex' } }}>Sign in</StyledButton>

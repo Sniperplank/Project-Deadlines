@@ -32,7 +32,7 @@ function Auth() {
     }
 
     return (
-        <Box flex={5} display='flex' justifyContent='center' alignItems='center' paddingBottom={10}>
+        <Box flex={5} display='flex' justifyContent='center' alignItems='center' padding={10}>
             <CardBox sx={{ minWidth: {xs: 0, sm: 400} }}>
                 <Typography variant='h5' paddingBottom={3}>{isSignup ? 'Sign up' : 'Sign In'}</Typography>
                 <form onSubmit={handleSubmit}>
