@@ -21,7 +21,7 @@ function MobileMenu({ logout, onClose }) {
         <Stack spacing={2} sx={{ display: { xs: 'flex', sm: 'none' } }}>
             {
                 user ? (<>
-                    <Typography variant='h5' align='center'>Projects</Typography>
+                    <Typography variant='h6' textAlign='center'>{user.result.name}</Typography>
                     <MenuButton component={Link} to='/ongoing' onClick={onClose} variant='outlined' color='primary'>Ongoing</MenuButton>
                     <MenuButton component={Link} to='/finished' onClick={onClose} variant='outlined' color='primary'>Finished</MenuButton>
                     <MenuButton component={Link} to='/aborted' onClick={onClose} variant='outlined' color='primary'>Aborted</MenuButton>
@@ -36,11 +36,8 @@ function MobileMenu({ logout, onClose }) {
             <MenuButton component={Link} to='/about' onClick={onClose} variant='outlined' color='primary' startIcon={<InfoIcon />}>About</MenuButton>
             <MenuButton href="https://github.com/Sniperplank/Project-Deadlines" variant='outlined' color='primary' startIcon={<GitHubIcon />}>GitHub</MenuButton>
             <Stack justifyContent='space-around' direction='row'>
-                <StyledIconButton onClick={() => { setIsDarkMode(false) }}>
-                    <LightModeIcon color={isDarkMode ? 'primary' : 'black'} />
-                </StyledIconButton>
-                <StyledIconButton onClick={() => { setIsDarkMode(true) }}>
-                    <ModeNightIcon color={isDarkMode ? 'black' : 'primary'} />
+                <StyledIconButton onClick={() => { setIsDarkMode(prev => !prev) }}>
+                    {isDarkMode ? <LightModeIcon color={'primary'} /> : <ModeNightIcon color={'primary'} />}
                 </StyledIconButton>
             </Stack>
             <hr></hr>

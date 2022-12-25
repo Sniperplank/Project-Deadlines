@@ -14,6 +14,7 @@ import '../../../App.css'
 import TaskModal from './TaskModal';
 import EditModal from './EditModal';
 import { useAuth } from '../../../contexts/AuthContext';
+import { StyledInput } from '../../Styled MUI components/StyledInput';
 
 function OngoingOpenCard() {
     const { user } = useAuth()
@@ -47,57 +48,60 @@ function OngoingOpenCard() {
     })
 
     return (
-        <Box flex={4} p={5} sx={{ overflowY: 'scroll' }}>
-            <Stack width='100%' spacing={6} sx={{ marginTop: 10, marginBottom: 20 }}>
-                <CardBox >
-                    <Stack spacing={6}>
-                        <Typography variant='h4' flexGrow={1} textAlign='center'>{project.name}</Typography>
-                        <hr></hr>
-                        <Stack direction='row' justifyContent='space-evenly'>
-                            <Typography variant='h6'>Started On: {moment(project.startDate).format("MMM Do YYYY")}</Typography>
-                            <Typography variant='h6'>Due By: {moment(project.dueDate).format("MMM Do YYYY")}</Typography>
+        <Box p={{ xs: 1, sm: 10 }}>
+            <CardBox >
+                <Stack spacing={6}>
+                    <Typography variant='h4' flexGrow={1} textAlign='center'>{project.name}</Typography>
+                    <hr></hr>
+                    <Stack direction='row' justifyContent='space-evenly'>
+                        <Typography variant='h6'>Started On: {moment(project.startDate).format("MMM Do YYYY")}</Typography>
+                        <Typography variant='h6'>Due By: {moment(project.dueDate).format("MMM Do YYYY")}</Typography>
+                    </Stack>
+                    <CardBox border={2} sx={{ borderColor: 'primary.main' }}>
+                        <Stack direction='row' justifyContent='space-between'>
+                            <Typography variant='h5'>Description:</Typography>
+                            <StyledIconButton onClick={() => setIsEditModalOpen(true)}>
+                                <EditIcon color='primary' />
+                            </StyledIconButton>
                         </Stack>
-                        <CardBox border={2} sx={{ borderColor: 'primary.main' }}>
-                            <Stack direction='row' justifyContent='space-between'>
-                                <Typography variant='h5'>Description:</Typography>
-                                <StyledIconButton onClick={() => setIsEditModalOpen(true)}>
-                                    <EditIcon color='primary' />
-                                </StyledIconButton>
+                        <br></br>
+                        <Typography variant='body1'>{project.description}</Typography>
+                    </CardBox>
+                    <EditModal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} project={project} />
+                    <Stack spacing={5} direction={{ xs: 'column', sm: 'row' }} justifyContent='space-evenly'>
+                        <Stack spacing={2} width={{ xs: '100%', sm: '130%' }}>
+                            <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
+                                <Typography variant='h5'>ToDo Tasks:</Typography>
+                                <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
                             </Stack>
-                            <br></br>
-                            <Typography variant='body1'>{project.description}</Typography>
-                        </CardBox>
-                        <EditModal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} project={project} />
-                        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
-                            <Typography variant='h5'>ToDo Tasks:</Typography>
-                            <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
+                            {
+                                !tasks.length ?
+                                    <CircularProgress size={40} sx={{ alignSelf: 'center' }} />
+                                    : (
+                                        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={6}>
+                                            {
+                                                Object.entries(tasks).map(([key, value]) => {
+                                                    return (
+                                                        <Grid item xs={12} sm={12} md={6} key={key}>
+                                                            <Task task={value} />
+                                                        </Grid>
+                                                    )
+                                                })
+                                            }
+                                        </Grid>
+                                    )
+                            }
                         </Stack>
-                        <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} />
-                        {
-                            !tasks.length ?
-                                <CircularProgress size={40} sx={{ alignSelf: 'center' }} />
-                                : (
-                                    <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} paddingRight={6}>
-                                        {
-                                            Object.entries(tasks).map(([key, value]) => {
-                                                return (
-                                                    <Grid item xs={12} sm={12} md={6} key={key}>
-                                                        <Task task={value} />
-                                                    </Grid>
-                                                )
-                                            })
-                                        }
-                                    </Grid>
-                                )
-                        }
-                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
-                            <StyledButton onClick={finishProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
-                            <StyledButton onClick={abortProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Aborte Project</StyledButton>
-                        </Stack>
+                        <StyledInput label="Notes" multiline minRows={10} defaultValue="Default Value" fullWidth/>
+                    </Stack>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
+                        <StyledButton onClick={finishProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
+                        <StyledButton onClick={abortProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Aborte Project</StyledButton>
                         <StyledButton component={Link} to='/ongoing' variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Back</StyledButton>
                     </Stack>
-                </CardBox>
-            </Stack>
+                </Stack>
+                <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} />
+            </CardBox>
         </Box>
     )
 }
