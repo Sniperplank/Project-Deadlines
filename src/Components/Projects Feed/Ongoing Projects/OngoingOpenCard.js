@@ -12,7 +12,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
 import '../../../App.css'
 import TaskModal from './TaskModal';
-import EditModal from './EditModal';
+import DescEditModal from './DescEditModal';
 import { useAuth } from '../../../contexts/AuthContext';
 import { StyledInput } from '../../Styled MUI components/StyledInput';
 
@@ -22,7 +22,7 @@ function OngoingOpenCard() {
     const [project, setProject] = useState({})
     const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+    const [isDescEditModalOpen, setIsDescEditModalOpen] = useState(false)
     const navigate = useNavigate()
 
     const finishProject = async () => {
@@ -60,14 +60,14 @@ function OngoingOpenCard() {
                     <CardBox border={2} sx={{ borderColor: 'primary.main' }}>
                         <Stack direction='row' justifyContent='space-between'>
                             <Typography variant='h5'>Description:</Typography>
-                            <StyledIconButton onClick={() => setIsEditModalOpen(true)}>
+                            <StyledIconButton onClick={() => setIsDescEditModalOpen(true)}>
                                 <EditIcon color='primary' />
                             </StyledIconButton>
                         </Stack>
                         <br></br>
                         <Typography variant='body1'>{project.description}</Typography>
                     </CardBox>
-                    <EditModal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} project={project} />
+                    <DescEditModal open={isDescEditModalOpen} onClose={() => setIsDescEditModalOpen(false)} project={project} />
                     <Stack spacing={5} direction={{ xs: 'column', sm: 'row' }} justifyContent='space-evenly'>
                         <Stack spacing={2} width={{ xs: '100%', sm: '130%' }}>
                             <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
