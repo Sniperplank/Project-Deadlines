@@ -57,7 +57,6 @@ function OngoingOpenCard() {
 
     const saveNotes = async () => {
         await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId, { ...project, notes: notes })
-        console.log(notes)
     }
 
     return (
