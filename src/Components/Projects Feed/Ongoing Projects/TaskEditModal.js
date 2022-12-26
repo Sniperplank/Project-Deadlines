@@ -5,10 +5,8 @@ import { ModalContent } from '../../Styled MUI components/ModalContent'
 import { ModalOverlay } from '../../Styled MUI components/ModalOverlay'
 import { StyledInput } from '../../Styled MUI components/StyledInput'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 function TaskEditModal({ open, onClose, task }) {
-    const { projectId } = useParams()
     const [description, setDescription] = useState(task.description)
 
     const handleChange = (e) => {

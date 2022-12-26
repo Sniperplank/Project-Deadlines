@@ -21,11 +21,16 @@ function OngoingOpenCard() {
     const { user } = useAuth()
     const { projectId } = useParams()
     const [project, setProject] = useState({})
+    const [notes, setNotes] = useState('')
     const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
     const [isDescEditModalOpen, setIsDescEditModalOpen] = useState(false)
     const [isNameEditModalOpen, setIsNameEditModalOpen] = useState(false)
     const navigate = useNavigate()
+
+    const handleNotesChange = (e) => {
+        setNotes(e.target.value)
+    }
 
     const finishProject = async () => {
         navigate('/ongoing')
@@ -44,10 +49,16 @@ function OngoingOpenCard() {
             const projectInfo = await axios.get('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId)
             const tasksData = await axios.get('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + projectId)
             setProject(projectInfo.data[0])
+            setNotes(projectInfo.data[0].notes)
             setTasks(tasksData.data.result)
         }
         getProjectInfo()
-    })
+    }, [])
+
+    const saveNotes = async () => {
+        await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId, { ...project, notes: notes })
+        console.log(notes)
+    }
 
     return (
         <Box p={{ xs: 1, sm: 10 }}>
@@ -77,7 +88,7 @@ function OngoingOpenCard() {
                     </CardBox>
                     <DescEditModal open={isDescEditModalOpen} onClose={() => setIsDescEditModalOpen(false)} project={project} />
                     <Stack spacing={5} direction={{ xs: 'column', sm: 'row' }} justifyContent='space-evenly'>
-                        <Stack spacing={2} width={{ xs: '100%', sm: '130%' }}>
+                        <Stack spacing={2} width={{ xs: '100%', sm: '120%' }}>
                             <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
                                 <Typography variant='h5'>ToDo Tasks:</Typography>
                                 <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
@@ -100,8 +111,12 @@ function OngoingOpenCard() {
                                     )
                             }
                         </Stack>
-                        <StyledInput label="Notes" multiline minRows={10} defaultValue="Default Value" fullWidth />
+                        <Stack spacing={4} sx={{ width: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+                            <StyledInput label="Notes" multiline minRows={10} defaultValue={notes} onChange={handleNotesChange} InputLabelProps={{ shrink: true }} sx={{ '& .MuiInputBase-root': { color: 'text.main' } }} fullWidth />
+                            <StyledButton variant='contained' color='primary' onClick={saveNotes} sx={{ width: '40%', height: 40 }}>Save notes</StyledButton>
+                        </Stack>
                     </Stack>
+                    <hr></hr>
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
                         <StyledButton onClick={finishProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>
                         <StyledButton onClick={abortProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Aborte Project</StyledButton>
