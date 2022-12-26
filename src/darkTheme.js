@@ -20,5 +20,14 @@ export const darkTheme = createTheme({
         body: {
             main: '#0e0b04'
         },
-    }
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 660,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+        },
+    },
 })

@@ -3,5 +3,5 @@ import { styled } from "@mui/material";
 
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
     borderRadius: 20,
-    width: 50,
+    width: 40,
 }));

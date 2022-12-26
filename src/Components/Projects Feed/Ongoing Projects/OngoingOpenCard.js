@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../../../App.css'
 import TaskModal from './TaskModal';
 import DescEditModal from './DescEditModal';
+import NameEditModal from './NameEditModal';
 import { useAuth } from '../../../contexts/AuthContext';
 import { StyledInput } from '../../Styled MUI components/StyledInput';
 
@@ -23,6 +24,7 @@ function OngoingOpenCard() {
     const [tasks, setTasks] = useState({})
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
     const [isDescEditModalOpen, setIsDescEditModalOpen] = useState(false)
+    const [isNameEditModalOpen, setIsNameEditModalOpen] = useState(false)
     const navigate = useNavigate()
 
     const finishProject = async () => {
@@ -51,7 +53,13 @@ function OngoingOpenCard() {
         <Box p={{ xs: 1, sm: 10 }}>
             <CardBox >
                 <Stack spacing={6}>
-                    <Typography variant='h4' flexGrow={1} textAlign='center'>{project.name}</Typography>
+                    <Stack direction='row'>
+                        <Typography variant='h4' flexGrow={1} textAlign='center'>{project.name}</Typography>
+                        <StyledIconButton onClick={() => setIsNameEditModalOpen(true)}>
+                            <EditIcon color='primary' />
+                        </StyledIconButton>
+                    </Stack>
+                    <NameEditModal open={isNameEditModalOpen} onClose={() => setIsNameEditModalOpen(false)} project={project} />
                     <hr></hr>
                     <Stack direction='row' justifyContent='space-evenly'>
                         <Typography variant='h6'>Started On: {moment(project.startDate).format("MMM Do YYYY")}</Typography>
@@ -92,7 +100,7 @@ function OngoingOpenCard() {
                                     )
                             }
                         </Stack>
-                        <StyledInput label="Notes" multiline minRows={10} defaultValue="Default Value" fullWidth/>
+                        <StyledInput label="Notes" multiline minRows={10} defaultValue="Default Value" fullWidth />
                     </Stack>
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
                         <StyledButton onClick={finishProject} variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Finish Project</StyledButton>

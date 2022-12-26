@@ -20,5 +20,14 @@ export const lightTheme = createTheme({
         body: {
             main: '#faf6ed'
         },
-    }
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 660,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+        },
+    },
 })
