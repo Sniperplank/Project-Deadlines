@@ -71,9 +71,15 @@ function OngoingOpenCard() {
                     </Stack>
                     <NameEditModal open={isNameEditModalOpen} onClose={() => setIsNameEditModalOpen(false)} project={project} />
                     <hr></hr>
-                    <Stack direction='row' justifyContent='space-evenly'>
-                        <Typography variant='h6'>Started On: <Typography variant='h6' color='primary'>{moment(project.startDate).format("MMM Do YYYY")}</Typography></Typography>
-                        <Typography variant='h6'>Due By: <Typography variant='h6' color='primary'>{moment(project.dueDate).format("MMM Do YYYY")}</Typography></Typography>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-evenly'>
+                        <Stack direction='row' spacing={1}>
+                            <Typography variant='h6'>Started On: </Typography>
+                            <Typography variant='h6' color='primary'>{moment(project.startDate).format("MMM Do YYYY")}</Typography>
+                        </Stack>
+                        <Stack direction='row' spacing={1}>
+                            <Typography variant='h6'>Due By: </Typography>
+                            <Typography variant='h6' color='primary'>{moment(project.dueDate).format("MMM Do YYYY")}</Typography>
+                        </Stack>
                     </Stack>
                     <CardBox border={2} sx={{ borderColor: 'primary.main' }}>
                         <Stack direction='row' justifyContent='space-between'>
