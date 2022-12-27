@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Stack } from '@mui/material'
+import { Box, CircularProgress, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { StyledButton } from '../../Styled MUI components/StyledButton'
 import AddIcon from '@mui/icons-material/Add';
@@ -21,7 +21,8 @@ function OngoingProjects() {
     })
 
     return (
-        <Box p={10}>
+        <Box p={{ xs: 1, sm: 10 }} pl={{ xs: 1, sm: 20 }} pr={{ xs: 1, sm: 20 }}>
+            <Typography variant='h4' color='primary' textAlign='center'>Ongoing Projects</Typography>
             <StyledButton onClick={() => setIsNPModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none', float: 'right', marginRight: 7 }}>New Project</StyledButton>
             <NewProjectModal open={isNPModalOpen} onClose={() => setIsNPModalOpen(false)} />
             {

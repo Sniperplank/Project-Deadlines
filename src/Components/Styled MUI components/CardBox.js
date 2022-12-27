@@ -6,6 +6,8 @@ export const CardBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
     boxShadow: 3,
     padding: 40,
+    paddingLeft: 50,
+    paddingRight: 50,
     color: theme.palette.text.main,
     textDecoration: 'none',
 }));

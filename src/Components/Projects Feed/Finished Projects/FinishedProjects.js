@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Stack } from '@mui/material'
+import { Box, CircularProgress, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import FinishedCard from './FinishedCard';
@@ -17,7 +17,8 @@ function FinishedProjects() {
     })
 
     return (
-        <Box p={10}>
+        <Box p={{ xs: 1, sm: 10 }} pl={{ xs: 1, sm: 20 }} pr={{ xs: 1, sm: 20 }}>
+            <Typography variant='h4' color='primary' textAlign='center'>Finished Projects</Typography>
             {
                 !projects.length ?
                     <CircularProgress size={50} />

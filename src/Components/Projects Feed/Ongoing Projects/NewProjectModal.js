@@ -39,11 +39,11 @@ function NewProjectModal({ open, onClose }) {
                     <StyledInput variant='outlined' name='name' label='Name' onChange={handleChange} />
                     <StyledInput variant='outlined' name='description' label='Description' onChange={handleChange} />
                     <Stack>
-                        <Stack direction="row" spacing={3} sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ display: { xs: 'none', sm: 'flex' } }}>
                             <StyledDesktopDatePicker label='Start Date' name='startDate' value={projectData.startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
                             <StyledDesktopDatePicker label='Due Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
-                        <Stack direction="row" spacing={3} sx={{ display: { xs: 'flex', sm: 'none' } }}>
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ display: { xs: 'flex', sm: 'none' } }}>
                             <MobileDatePicker label='Start Date' name='startDate' value={projectData.startDate} onChange={handleStartDateChange} renderInput={(params) => <StyledInput {...params} />} />
                             <MobileDatePicker label='Due Date' name='dueDate' value={projectData.dueDate} onChange={handleEndDateChange} renderInput={(params) => <StyledInput {...params} />} />
                         </Stack>
