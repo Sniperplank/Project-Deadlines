@@ -12,8 +12,14 @@ function AbortedCard({ project }) {
           <Typography variant='body1'>{project.description}</Typography>
         </Stack>
         <Stack spacing={4}>
-          <Typography variant='h6'>Started On: <Typography variant='h6' color='primary'>{moment(project.startDate).format("MMM Do YYYY")}</Typography></Typography>
-          <Typography variant='h6'>Due By: <Typography variant='h6' color='primary'>{moment(project.dueDate).format("MMM Do YYYY")}</Typography></Typography>
+          <Stack direction='row' spacing={1}>
+            <Typography variant='h6'>Started On: </Typography>
+            <Typography variant='h6' color='primary'>{moment(project.startDate).format("MMM Do YYYY")}</Typography>
+          </Stack>
+          <Stack direction='row' spacing={1}>
+            <Typography variant='h6'>Due By: </Typography>
+            <Typography variant='h6' color='primary'>{moment(project.dueDate).format("MMM Do YYYY")}</Typography>
+          </Stack>
         </Stack>
       </Stack>
     </CardBox>
