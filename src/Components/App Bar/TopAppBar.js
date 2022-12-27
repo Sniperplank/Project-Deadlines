@@ -26,6 +26,11 @@ function TopAppBar() {
     const navigate = useNavigate()
     const location = useLocation()
 
+    const openInNewTab = (url) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -55,10 +60,6 @@ function TopAppBar() {
                 <Typography variant='h5' component={Link} to='/' color='primary' sx={{ textDecoration: 'none', fontWeight: 'bold', fontSize: { xs: 20, sm: 27 } }}>Project Deadlines</Typography>
                 <Stack spacing={1} sx={{ display: { xs: 'none', sm: 'flex' } }}>
                     {
-                        // user && <>
-                        //     <Avatar>{user.result.name.charAt(0)}</Avatar>
-                        //     <Typography variant='h6' sx={{ display: { xs: 'none', sm: 'block' } }}>{user.result.name}</Typography>
-                        // </>
                         user ?
                             <Stack spacing={3} direction='row'>
                                 <NavButton component={Link} to='/ongoing' variant='text'>Ongoing</NavButton>
@@ -75,7 +76,7 @@ function TopAppBar() {
                             <StyledIconButton component={Link} to='/about'>
                                 <InfoIcon color='primary' />
                             </StyledIconButton>
-                            <StyledIconButton href="https://github.com/Sniperplank/Project-Deadlines">
+                            <StyledIconButton onClick={() => openInNewTab('https://github.com/Sniperplank/Project-Deadlines')}>
                                 <GitHubIcon color='primary' />
                             </StyledIconButton>
                             <StyledIconButton onClick={() => { setIsDarkMode(prev => !prev) }}>
@@ -136,7 +137,6 @@ function TopAppBar() {
                                     Logout
                                 </MenuItem>
                             </Menu>
-                            {/* <StyledButton onClick={logout} variant='contained' color='primary' sx={{ height: 50, float: 'right', display: { xs: 'none', sm: 'block' } }}>Logout</StyledButton> */}
                         </Stack>
                         : <StyledButton component={Link} to='/auth' variant='contained' color='primary' sx={{ height: 40, display: { xs: 'none', sm: 'flex' } }}>Sign in</StyledButton>
                 }
