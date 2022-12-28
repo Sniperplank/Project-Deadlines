@@ -49,8 +49,15 @@ function OngoingOpenCard() {
             const projectInfo = await axios.get('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId)
             const tasksData = await axios.get('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + projectId)
             setProject(projectInfo.data[0])
-            setNotes(projectInfo.data[0].notes)
             setTasks(tasksData.data.result)
+        }
+        getProjectInfo()
+    })
+
+    useEffect(() => {
+        async function getProjectInfo() {
+            const projectInfo = await axios.get('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId)
+            setNotes(projectInfo.data[0].notes)
         }
         getProjectInfo()
     }, [])
@@ -117,7 +124,10 @@ function OngoingOpenCard() {
                             }
                         </Stack>
                         <Stack spacing={4} sx={{ width: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                            <StyledInput label="Notes" multiline minRows={10} defaultValue={notes} onChange={handleNotesChange} InputLabelProps={{ shrink: true }} sx={{ '& .MuiInputBase-root': { color: 'text.main' } }} fullWidth />
+                            <StyledInput label="Notes" multiline minRows={10} defaultValue={project.notes} onChange={handleNotesChange} InputLabelProps={{ shrink: true }} sx={{ '& .MuiInputBase-root': { color: 'text.main' } }} fullWidth />
+                            {
+                                notes !== project.notes && <Typography variant='body1' color='red'>*Unsaved Changes to Notes*</Typography>
+                            }
                             <StyledButton variant='contained' color='primary' onClick={saveNotes} sx={{ width: '40%', height: 40 }}>Save notes</StyledButton>
                         </Stack>
                     </Stack>
