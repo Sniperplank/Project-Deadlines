@@ -133,7 +133,7 @@ function OngoingOpenCard() {
                             }
                         </Stack>
                         <Stack spacing={4} sx={{ width: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                            <StyledInput label="Notes" multiline minRows={10} defaultValue={project.notes} onChange={handleNotesChange} InputLabelProps={{ shrink: true }} sx={{ '& .MuiInputBase-root': { color: 'text.main' } }} fullWidth />
+                            <StyledInput label="Notes" multiline minRows={10} maxRows={20} defaultValue={project.notes} onChange={handleNotesChange} InputLabelProps={{ shrink: true }} sx={{ '& .MuiInputBase-root': { color: 'text.main' } }} fullWidth />
                             {
                                 notes !== project.notes && <Typography variant='body1' color='red'>*Unsaved Changes to Notes*</Typography>
                             }
