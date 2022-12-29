@@ -123,7 +123,7 @@ function OngoingOpenCard() {
                                                 Object.entries(tasks).map(([key, value]) => {
                                                     return (
                                                         <Grid item xs={12} sm={12} md={6} key={key}>
-                                                            <Task task={value} update={updatePage} />
+                                                            <Task task={value} update_={updatePage} />
                                                         </Grid>
                                                     )
                                                 })
