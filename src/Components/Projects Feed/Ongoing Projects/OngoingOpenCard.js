@@ -23,13 +23,19 @@ function OngoingOpenCard() {
     const [project, setProject] = useState({})
     const [notes, setNotes] = useState('')
     const [tasks, setTasks] = useState({})
+    const [update, setUpdate] = useState(0)
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
     const [isDescEditModalOpen, setIsDescEditModalOpen] = useState(false)
     const [isNameEditModalOpen, setIsNameEditModalOpen] = useState(false)
     const navigate = useNavigate()
 
+    const updatePage = () => {
+        setUpdate(prev => prev + 1)
+    }
+
     const handleNotesChange = (e) => {
         setNotes(e.target.value)
+        updatePage()
     }
 
     const finishProject = async () => {
@@ -52,7 +58,7 @@ function OngoingOpenCard() {
             setTasks(tasksData.data.result)
         }
         getProjectInfo()
-    })
+    }, [update])
 
     useEffect(() => {
         async function getProjectInfo() {
@@ -60,10 +66,11 @@ function OngoingOpenCard() {
             setNotes(projectInfo.data[0].notes)
         }
         getProjectInfo()
-    }, [])
+    }, [projectId])
 
     const saveNotes = async () => {
         await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId, { ...project, notes: notes })
+        updatePage()
     }
 
     return (
@@ -103,7 +110,10 @@ function OngoingOpenCard() {
                         <Stack spacing={2} width={{ xs: '100%', sm: '120%' }}>
                             <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
                                 <Typography variant='h5'>ToDo Tasks:</Typography>
-                                <StyledButton onClick={() => setIsTaskModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
+                                <StyledButton onClick={() => {
+                                    setIsTaskModalOpen(true)
+                                    updatePage()
+                                }} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none' }}>Add Task</StyledButton>
                             </Stack>
                             {
                                 !tasks.length ?
@@ -138,7 +148,7 @@ function OngoingOpenCard() {
                         <StyledButton component={Link} to='/ongoing' variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Back</StyledButton>
                     </Stack>
                 </Stack>
-                <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} />
+                <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} update={updatePage}/>
             </CardBox>
         </Box>
     )
