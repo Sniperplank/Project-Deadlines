@@ -24,7 +24,7 @@ function Task({ task, update_ }) {
 
     return (
         <GridItem>
-            <Typography variant='body1'>{task.description}</Typography>
+            <Typography variant='body1'>{task.order}. {task.description}</Typography>
             <Stack direction='row' justifyContent='right'>
                 <StyledIconButton onClick={finishTask}>
                     <CheckIcon color='primary' />

@@ -8,13 +8,19 @@ import axios from 'axios'
 
 function TaskEditModal({ open, onClose, task, update }) {
     const [description, setDescription] = useState(task.description)
+    const [order, setOrder] = useState(task.order)
 
-    const handleChange = (e) => {
+    const handleDescChange = (e) => {
         setDescription(e.target.value)
     }
 
-    const updateDesc = async () => {
+    const handleOrderChange = (e) => {
+        setOrder(e.target.value)
+    }
+
+    const updateTask = async () => {
         await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + task._id, { ...task, description: description })
+        await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + task._id, { ...task, order: order })
         update()
     }
 
@@ -25,12 +31,13 @@ function TaskEditModal({ open, onClose, task, update }) {
             <ModalContent sx={{ minWidth: {xs: 0, sm: 400} }}>
                 <Typography variant='h5'>Edit Task Description</Typography>
                 <Stack spacing={3} marginTop={2} marginBottom={2}>
-                    <StyledInput variant='outlined' name='name' value={description} onChange={handleChange} />
+                    <StyledInput variant='outlined' label='Description' value={description} onChange={handleDescChange} />
+                    <StyledInput variant='outlined' label='Order' value={order} onChange={handleOrderChange} />
                 </Stack>
                 <Stack direction='row' spacing={2} marginTop={3} justifyContent='right'>
                     <Button variant='contained' color='primary' onClick={() => {
                         onClose()
-                        updateDesc()
+                        updateTask()
                     }}>Save</Button>
                     <Button variant='contained' color='error' onClick={onClose}>Cancel</Button>
                 </Stack>

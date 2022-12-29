@@ -15,6 +15,7 @@ function TaskModal({ open, onClose, project, update }) {
 
     const addTask = async () => {
         await axios.post('https://project-deadlines-server.vercel.app/projects/ongoing/tasks', taskData)
+        // await axios.post('http://localhost:5000/projects/ongoing/tasks', taskData)
         update()
     }
 
