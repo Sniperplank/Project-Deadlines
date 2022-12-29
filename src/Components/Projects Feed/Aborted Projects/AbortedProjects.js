@@ -14,7 +14,7 @@ function AbortedProjects() {
             setProjects(projectInfo.data)
         }
         getProjectInfo()
-    })
+    }, [])
 
     return (
         <Box p={{ xs: 1, sm: 10 }} pl={{ xs: 1, sm: 20 }} pr={{ xs: 1, sm: 20 }}>

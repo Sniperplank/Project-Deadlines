@@ -7,7 +7,7 @@ import { StyledInput } from '../../Styled MUI components/StyledInput'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-function NameEditModal({ open, onClose, project }) {
+function NameEditModal({ open, onClose, project, update }) {
     const { projectId } = useParams()
     const [name, setName] = useState(project.name)
 
@@ -17,6 +17,7 @@ function NameEditModal({ open, onClose, project }) {
 
     const updateName = async () => {
         await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/' + projectId, { ...project, name: name })
+        update()
     }
 
     if (!open) return null

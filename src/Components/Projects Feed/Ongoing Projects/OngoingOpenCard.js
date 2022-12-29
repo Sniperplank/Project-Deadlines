@@ -35,7 +35,6 @@ function OngoingOpenCard() {
 
     const handleNotesChange = (e) => {
         setNotes(e.target.value)
-        updatePage()
     }
 
     const finishProject = async () => {
@@ -83,7 +82,7 @@ function OngoingOpenCard() {
                             <EditIcon color='primary' />
                         </StyledIconButton>
                     </Stack>
-                    <NameEditModal open={isNameEditModalOpen} onClose={() => setIsNameEditModalOpen(false)} project={project} />
+                    <NameEditModal open={isNameEditModalOpen} onClose={() => setIsNameEditModalOpen(false)} project={project} update={updatePage} />
                     <hr></hr>
                     <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-evenly'>
                         <Stack direction='row' spacing={1}>
@@ -105,7 +104,7 @@ function OngoingOpenCard() {
                         <br></br>
                         <Typography variant='body1'>{project.description}</Typography>
                     </CardBox>
-                    <DescEditModal open={isDescEditModalOpen} onClose={() => setIsDescEditModalOpen(false)} project={project} />
+                    <DescEditModal open={isDescEditModalOpen} onClose={() => setIsDescEditModalOpen(false)} project={project} update={updatePage} />
                     <Stack spacing={5} direction={{ xs: 'column', sm: 'row' }} justifyContent='space-evenly'>
                         <Stack spacing={2} width={{ xs: '100%', sm: '120%' }}>
                             <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' paddingLeft={5} paddingRight={5} spacing={2}>
@@ -124,7 +123,7 @@ function OngoingOpenCard() {
                                                 Object.entries(tasks).map(([key, value]) => {
                                                     return (
                                                         <Grid item xs={12} sm={12} md={6} key={key}>
-                                                            <Task task={value} />
+                                                            <Task task={value} update={updatePage} />
                                                         </Grid>
                                                     )
                                                 })
@@ -148,7 +147,7 @@ function OngoingOpenCard() {
                         <StyledButton component={Link} to='/ongoing' variant='contained' color='primary' sx={{ height: 40 }} fullWidth>Back</StyledButton>
                     </Stack>
                 </Stack>
-                <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} update={updatePage}/>
+                <TaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} project={project} update={updatePage} />
             </CardBox>
         </Box>
     )

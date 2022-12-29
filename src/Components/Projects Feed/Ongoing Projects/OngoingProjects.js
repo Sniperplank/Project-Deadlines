@@ -11,6 +11,11 @@ function OngoingProjects() {
     const [isNPModalOpen, setIsNPModalOpen] = useState(false)
     const { user } = useAuth()
     const [projects, setProjects] = useState({})
+    const [update, setUpdate] = useState(0)
+
+    const updatePage = () => {
+        setUpdate(prev => prev + 1)
+    }
 
     useEffect(() => {
         async function getProjectInfo() {
@@ -18,13 +23,13 @@ function OngoingProjects() {
             setProjects(projectInfo.data)
         }
         getProjectInfo()
-    })
+    }, [update])
 
     return (
         <Box p={{ xs: 1, sm: 10 }} pl={{ xs: 1, sm: 20 }} pr={{ xs: 1, sm: 20 }}>
             <Typography variant='h4' color='primary' textAlign='center'>Ongoing Projects</Typography>
             <StyledButton onClick={() => setIsNPModalOpen(true)} variant='contained' color='primary' startIcon={<AddIcon />} sx={{ height: 40, textTransform: 'none', float: 'right', marginRight: 7 }}>New Project</StyledButton>
-            <NewProjectModal open={isNPModalOpen} onClose={() => setIsNPModalOpen(false)} />
+            <NewProjectModal open={isNPModalOpen} onClose={() => setIsNPModalOpen(false)} update={updatePage}/>
             {
                 !projects.length ?
                     <CircularProgress size={50} />

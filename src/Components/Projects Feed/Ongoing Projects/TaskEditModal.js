@@ -6,7 +6,7 @@ import { ModalOverlay } from '../../Styled MUI components/ModalOverlay'
 import { StyledInput } from '../../Styled MUI components/StyledInput'
 import axios from 'axios'
 
-function TaskEditModal({ open, onClose, task }) {
+function TaskEditModal({ open, onClose, task, update }) {
     const [description, setDescription] = useState(task.description)
 
     const handleChange = (e) => {
@@ -15,6 +15,7 @@ function TaskEditModal({ open, onClose, task }) {
 
     const updateDesc = async () => {
         await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + task._id, { ...task, description: description })
+        update()
     }
 
     if (!open) return null

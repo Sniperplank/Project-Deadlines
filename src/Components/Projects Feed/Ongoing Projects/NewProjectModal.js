@@ -9,12 +9,13 @@ import { StyledInput } from '../../Styled MUI components/StyledInput'
 import { StyledDesktopDatePicker } from '../../Styled MUI components/StyledDatePicker'
 import axios from 'axios'
 
-function NewProjectModal({ open, onClose }) {
+function NewProjectModal({ open, onClose, update }) {
     const { user } = useAuth()
     const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', dueDate: '', userEmail: user.result.email })
 
     const addProject = async () => {
         await axios.post('https://project-deadlines-server.vercel.app/projects/ongoing', projectData)
+        update()
     }
 
     const handleChange = (e) => {

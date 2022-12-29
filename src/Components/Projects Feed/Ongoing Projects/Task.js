@@ -9,15 +9,17 @@ import axios from 'axios';
 import TaskEditModal from './TaskEditModal';
 
 
-function Task({ task }) {
+function Task({ task, update }) {
     const [isTaskEditModalOpen, setIsTaskEditModalOpen] = useState(false)
 
     const finishTask = async () => {
         await axios.delete('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/deleteTask?_id=' + task._id)
+        update()
     }
 
     const deleteTask = async () => {
         await axios.delete('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/deleteTask?_id=' + task._id)
+        update()
     }
 
     return (
@@ -34,7 +36,7 @@ function Task({ task }) {
                     <DeleteIcon color='primary' />
                 </StyledIconButton>
             </Stack>
-            <TaskEditModal open={isTaskEditModalOpen} onClose={() => setIsTaskEditModalOpen(false)} task={task} />
+            <TaskEditModal open={isTaskEditModalOpen} onClose={() => setIsTaskEditModalOpen(false)} task={task} update={update}/>
         </GridItem>
     )
 }
