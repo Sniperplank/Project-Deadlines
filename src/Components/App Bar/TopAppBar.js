@@ -60,15 +60,13 @@ function TopAppBar() {
                 <Typography variant='h5' component={Link} to='/' color='primary' sx={{ textDecoration: 'none', fontWeight: 'bold', fontSize: { xs: 20, sm: 27 } }}>Project Deadlines</Typography>
                 <Stack spacing={1} sx={{ display: { xs: 'none', sm: 'flex' } }}>
                     {
-                        user ?
+                        user &&
                             <Stack spacing={3} direction='row'>
                                 <NavButton component={Link} to='/ongoing' variant='text'>Ongoing</NavButton>
                                 <NavButton component={Link} to='/finished' variant='text'>Finished</NavButton>
                                 <NavButton component={Link} to='/aborted' variant='text'>Aborted</NavButton>
                             </Stack>
-                            : <Typography variant='h6' align='center' sx={{ display: { xs: 'none', sm: 'flex' } }}>Sign in to see projects!</Typography>
                     }
-
                 </Stack>
                 {
                     user ?
