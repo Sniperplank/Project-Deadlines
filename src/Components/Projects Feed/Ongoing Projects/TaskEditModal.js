@@ -19,8 +19,7 @@ function TaskEditModal({ open, onClose, task, update }) {
     }
 
     const updateTask = async () => {
-        await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + task._id, { ...task, description: description })
-        await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + task._id, { ...task, order: order })
+        await axios.patch('https://project-deadlines-server.vercel.app/projects/ongoing/tasks/' + task._id, { ...task, description: description, order: order })
         update()
     }
 
