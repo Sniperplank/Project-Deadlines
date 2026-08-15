@@ -1,4 +1,4 @@
 # Project Deadlines
 
 ## App: 
-https://project-deadlines.vercel.app/
+https://sniperplank.github.io/Project-Deadlines
